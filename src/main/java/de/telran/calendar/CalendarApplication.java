@@ -1,4 +1,4 @@
-package de.telran.calendar.calendar;
+package de.telran.calendar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
