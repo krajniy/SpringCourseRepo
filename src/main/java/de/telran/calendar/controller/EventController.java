@@ -1,6 +1,6 @@
 package de.telran.calendar.controller;
 
-import de.telran.calendar.model.Event;
+import de.telran.calendar.entity.Event;
 import de.telran.calendar.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

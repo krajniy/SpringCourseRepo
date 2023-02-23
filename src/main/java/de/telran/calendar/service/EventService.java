@@ -1,7 +1,7 @@
 package de.telran.calendar.service;
 
 
-import de.telran.calendar.model.Event;
+import de.telran.calendar.entity.Event;
 
 import java.time.LocalDate;
 import java.util.List;

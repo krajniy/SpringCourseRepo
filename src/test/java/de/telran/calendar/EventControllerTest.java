@@ -3,7 +3,7 @@ package de.telran.calendar;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.telran.calendar.controller.EventController;
-import de.telran.calendar.model.Event;
+import de.telran.calendar.entity.Event;
 import de.telran.calendar.service.EventService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

@@ -1,6 +1,6 @@
 package de.telran.calendar.service;
 
-import de.telran.calendar.model.Event;
+import de.telran.calendar.entity.Event;
 import de.telran.calendar.repository.EventRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

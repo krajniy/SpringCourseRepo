@@ -1,4 +1,4 @@
-package de.telran.calendar.model;
+package de.telran.calendar.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
