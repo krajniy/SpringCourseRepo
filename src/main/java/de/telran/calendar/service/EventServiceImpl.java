@@ -2,6 +2,7 @@ package de.telran.calendar.service;
 
 import de.telran.calendar.model.Event;
 import de.telran.calendar.repository.EventRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,29 +15,34 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventRepository repository;
 
+    @PostConstruct
+    public void fillBD(){
+        EventSeeder.seed(repository);
+    }
+
 
     public long create(Event event) {
-        return repository.save(event);
+        return repository.save(event).getId();
     }
 
     public Event get(long id) {
-        return repository.find(id).orElseThrow(IllegalArgumentException::new);
+        return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     public void update(long id, String eventName) {
-        Event e = repository.find(id).orElseThrow(IllegalArgumentException::new);
+        Event e = repository.findById(id).orElseThrow(IllegalArgumentException::new);
         e.setName(eventName);
 
     }
 
     @Override
     public void update(long id, LocalDate date) {
-        Event e = repository.find(id).orElseThrow(IllegalArgumentException::new);
+        Event e = repository.findById(id).orElseThrow(IllegalArgumentException::new);
         e.setDate(date);
     }
 
     public void delete(long id) {
-        Event e = repository.find(id).orElseThrow(IllegalArgumentException::new);
+        Event e = repository.findById(id).orElseThrow(IllegalArgumentException::new);
         repository.delete(e);
 
 

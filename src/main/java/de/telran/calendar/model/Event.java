@@ -1,56 +1,33 @@
 package de.telran.calendar.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "events")
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotEmpty
+    @Column(name = "event_date", nullable = false)
     private LocalDate date;
+
+    @NotEmpty
+    @NotBlank
+    @NonNull
+    @Column(name = "event_name", nullable = false, length = 280)
     private String name;
 
-    public Event() {
-    }
-
-    public Event(long id, LocalDate date, String name) {
-        this.id = id;
-        this.date = date;
-        this.name = name;
-    }
-
-    public Event(LocalDate date, String name) {
-        this.date = date;
-        this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", date=" + date +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

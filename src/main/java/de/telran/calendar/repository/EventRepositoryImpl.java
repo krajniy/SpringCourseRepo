@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @Component
-public class EventRepositoryImpl implements EventRepository{
+public class EventRepositoryImpl /* implements EventRepository*/{
 
     private static final List<Event> list = new ArrayList<>();
 
@@ -23,19 +23,18 @@ public class EventRepositoryImpl implements EventRepository{
         }
     }
 
-    @Override
+//    @Override
     public Optional<Event> find(long id) {
         Event event = null;
         try {
             event = list.get((int) id);
         } catch (Exception ignored){
-
         }
 
         return Optional.ofNullable(event);
     }
 
-    @Override
+//    @Override
     public long save(Event event) {
         long id = event.getId();
         if (id == 0) {
@@ -46,7 +45,7 @@ public class EventRepositoryImpl implements EventRepository{
         return id;
     }
 
-    @Override
+//    @Override
     public boolean delete(Event e) {
         return list.remove(e);
     }
