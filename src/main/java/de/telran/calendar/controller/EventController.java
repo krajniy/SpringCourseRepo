@@ -69,15 +69,15 @@ public class EventController {
 
     //TODO получение списка событий
 
-    @PostMapping("/events/filter")
-    public List<Event> getEventsByFilter(@RequestBody Object filter) {
-
-        // Получаем лист ивентов по фильтру: отправляем POST request на "/events/filter"
-        // фильтр ивентов передается как object в теле запроса,
-        // получаем list ивентов которые соответствуют фильтру в запросе
-
-        return eventService.getByFilter(filter);
-    }
+//    @PostMapping("/events/filter")
+//    public List<Event> getEventsByFilter(@RequestBody Object filter) {
+//
+//        // Получаем лист ивентов по фильтру: отправляем POST request на "/events/filter"
+//        // фильтр ивентов передается как object в теле запроса,
+//        // получаем list ивентов которые соответствуют фильтру в запросе
+//
+//        return eventService.getByFilter(filter);
+//    }
 
 
     @GetMapping("/events")
