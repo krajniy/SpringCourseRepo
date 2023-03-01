@@ -1,13 +1,12 @@
 package de.telran.calendar.service;
 
-import de.telran.calendar.entity.Event;
 import de.telran.calendar.entity.User;
 import de.telran.calendar.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -68,8 +67,33 @@ public class UserServiceImpl implements UserService {
         return repository.findByEmail(email);
     }
 
+//    @Override
+//    public List<User> getUsersByEvent(Event event, int limit, int offset) {
+//        return repository.findByEvent(event, PageRequest.of(offset, limit));
+//    }
+
     @Override
-    public List<User> getUsersByEvent(Event event, int limit, int offset) {
-        return repository.findByEvent(event, PageRequest.of(offset, limit));
+    public User getUserById(long id) {
+        return repository.findById(id).get();
     }
+
+    public Page<User> getByFilter(String name, String lastName, String userName, String email, Long eventId, Pageable pageable) {
+        if (name != null && lastName != null) {
+            return repository.findByNameContainingAndLastNameContainingOrderByIdDesc(name, lastName, pageable);
+        } else if (name != null) {
+            return repository.findByNameContainingOrderByIdDesc(name, pageable);
+        } else if (lastName != null) {
+            return repository.findByLastNameContainingOrderByIdDesc(lastName, pageable);
+        } else if (userName != null) {
+            return repository.findByUserNameContainingOrderByIdDesc(userName, pageable);
+        } else if (email != null) {
+            return repository.findByEmailContainingOrderByIdDesc(email, pageable);
+        } else if (eventId != null) {
+            return repository.findByEventsIdOrderByIdDesc(eventId, pageable);
+        } else {
+            return repository.findAll(pageable);
+        }
+    }
+
+
 }

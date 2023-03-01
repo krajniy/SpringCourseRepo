@@ -10,9 +10,6 @@ public interface EventService {
 
 
     Event get(long id);
-//    Object get(LocalDate date);
-//
-//    List<Object> get(String name);
 
     List<Event> get(LocalDate date, String name);
 
@@ -24,6 +21,8 @@ public interface EventService {
 
     void delete(long id);
 
-    List<Event> getByFilter(Object filter);
+//    List<Event> getByFilter(Object filter);
+
+
 
 }

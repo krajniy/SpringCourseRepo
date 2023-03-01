@@ -1,7 +1,9 @@
 package de.telran.calendar.service;
 
 import de.telran.calendar.entity.Event;
+import de.telran.calendar.entity.User;
 import de.telran.calendar.repository.EventRepository;
+import de.telran.calendar.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,12 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventRepository repository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostConstruct
     public void fillBD(){
-        EventSeeder.seed(repository);
+        EventSeeder.seed(repository, userRepository);
     }
 
 
@@ -48,9 +53,11 @@ public class EventServiceImpl implements EventService {
 
     }
 
-    public List<Event> getByFilter(Object filter) {
-        return null;
-    }
+//    public List<Event> getByFilter(Object filter) {
+//        return null;
+//    }
+
+
 
     public List<Event> get(LocalDate date, String name) {
 

@@ -3,13 +3,18 @@ package de.telran.calendar.service;
 import de.telran.calendar.entity.Event;
 import de.telran.calendar.entity.User;
 import de.telran.calendar.entity.UserGroup;
+import de.telran.calendar.repository.UserGroupRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserGroupServiceImpl implements UserGroupService{
-    // TODO
+    @Autowired
+    private UserGroupRepository repository;
 
 
     @Override
@@ -45,5 +50,10 @@ public class UserGroupServiceImpl implements UserGroupService{
     @Override
     public List<UserGroup> getUserGroupsByUser(User user, int limit, int offset) {
         return null;
+    }
+
+    @Override
+    public Page<UserGroup> getByFilter(String name, Long eventId, Long userId, Pageable pageable) {
+        return repository.findByNameOrEventsOrUsers(name,eventId,userId,pageable);
     }
 }

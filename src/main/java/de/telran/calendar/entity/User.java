@@ -1,5 +1,7 @@
 package de.telran.calendar.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -47,31 +49,42 @@ public class User {
     //TODO
 //        - birthDate
 
-    @Column(name = "birth_date")
+//    @NotEmpty
+//    @NotBlank
+//    @NonNull
+    @Column(name = "user_birth_date")
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private LocalDate birthDate;
 
-    //TODO
-//        - email
+    @NotEmpty
+    @NotBlank
+    @NonNull
+    @Column(name = "user_email", nullable = false, length = 50)
     private String email;
 
-    //TODO
-    //        - events (Set<Event>)
-    @ManyToMany(mappedBy = "users")
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_event",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "event_id")
+//    )
+//    private Set<Event> events;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Event> events = new HashSet<>();
 
-    //TODO
-    //        - userGroups (Set<UserGroup>)
     @ManyToMany(mappedBy = "users")
-    private Set<UserGroup> userGroups = new HashSet<>();
+    private Set<UserGroup> userGroups;
 
-    //TODO
-    //        - createdAt (date)
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    //TODO
-    //        - updatedAt (date)
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    public void addEvent(Event event) {
+        events.add(event);
+    }
 }

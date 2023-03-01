@@ -36,7 +36,7 @@ public class UserGroup {
     private Set<User> users = new HashSet<>();
 
     //        - events (Set<Event>)
-    @ManyToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userGroup")
     private Set<Event> events = new HashSet<>();
 
     //        - createdAt (date)
